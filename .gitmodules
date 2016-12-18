@@ -1,0 +1,3 @@
+[submodule "lib/Scz-Ecs"]
+	path = lib/Scz-Ecs
+	url = https://github.com/SimonKindhauser/Scz-Ecs.git
