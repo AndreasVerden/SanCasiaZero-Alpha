@@ -4,21 +4,33 @@ namespace sczGeb
 {
   export class RenderSystem extends sczEcs.SystemBase
   {
-    private canvas: HTMLElement;
+    private canvasCtx: CanvasRenderingContext2D;
 
     constructor(canvasId: string)
     {
         super();
-        this.canvas = <HTMLElement>document.getElementById(canvasId);
+        this.canvasCtx =
+          (<HTMLCanvasElement>document.getElementById(canvasId))
+          .getContext('2d');
     }
 
+    registerEntity(entity: sczEcs.Entity){
+      var renderComponent: RenderComponent
+        = entity.getComponentsByType(RenderComponent)[0];
+
+      if(null == renderComponent.svgImage){
+        renderComponent.svgImage = new Image();
+        renderComponent.svgImage.src = renderComponent.svgUrl;
+      }
+      super.registerEntity(entity);
+    }
 
     protected processEntity(entity: sczEcs.Entity){
       var renderComponent: RenderComponent
         = entity.getComponentsByType(RenderComponent)[0];
 
-        // rendering happens here:
-        // todo: rendering
+      // rendering happens here:
+      this.canvasCtx.drawImage(renderComponent.svgImage, 0, 0);
     }
   }
 }
