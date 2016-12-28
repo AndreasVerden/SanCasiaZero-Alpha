@@ -12,13 +12,27 @@ namespace sczGeb
         this.canvas = <HTMLElement>document.getElementById(canvasId);
     }
 
-
-    protected processEntity(entity: sczEcs.Entity){
+    registerEntity(entity: sczEcs.Entity){
       var renderComponent: RenderComponent
         = entity.getComponentsByType(RenderComponent)[0];
 
-        // rendering happens here:
-        // todo: rendering
+      if(null == renderComponent.svgElement){
+        var svgElement = document.createElement("object");
+        svgElement.setAttribute("type", "image/svg+xml");
+        svgElement.setAttribute("data", renderComponent.svgUrl);
+
+        renderComponent.svgElement = svgElement;
+        this.canvas.appendChild(svgElement);
+      }
+      super.registerEntity(entity);
+    }
+
+    protected processEntity(entity: sczEcs.Entity) {
+      var renderComponent: RenderComponent
+        = entity.getComponentsByType(RenderComponent)[0];
+
+      // rendering happens here:
+      // todo: rendering
     }
   }
 }
