@@ -25,6 +25,17 @@ namespace sczGeb
       super.registerEntity(entity);
     }
 
+    process(){
+      // sort entities by z position
+      this.entities.sort(function(a: sczEcs.Entity, b: sczEcs.Entity){
+        var aZ = a.getComponentsByType(TranslateComponent)[0].position.z;
+        var bZ = b.getComponentsByType(TranslateComponent)[0].position.z;
+        return aZ - bZ;
+      });
+
+      super.process();
+    }
+
     protected processEntity(entity: sczEcs.Entity){
       var renderComponent: RenderComponent
         = entity.getComponentsByType(RenderComponent)[0];
