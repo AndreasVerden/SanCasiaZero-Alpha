@@ -31,8 +31,12 @@ namespace sczGeb
       var renderComponent: RenderComponent
         = entity.getComponentsByType(RenderComponent)[0];
 
-      // rendering happens here:
-      // todo: rendering
+      var translateComponent: TranslateComponent
+        = entity.getComponentsByType(TranslateComponent)[0];
+
+      renderComponent.svgElement.style.top = translateComponent.position.y + "px";
+      renderComponent.svgElement.style.left = translateComponent.position.x + "px";
+      renderComponent.svgElement.style.zIndex = translateComponent.position.z;
     }
   }
 }
