@@ -28,9 +28,14 @@ namespace sczGeb
     protected processEntity(entity: sczEcs.Entity){
       var renderComponent: RenderComponent
         = entity.getComponentsByType(RenderComponent)[0];
+      var translateComponent: TranslateComponent
+        = entity.getComponentsByType(TranslateComponent)[0];
 
       // rendering happens here:
-      this.canvasCtx.drawImage(renderComponent.svgImage, 0, 0);
+      this.canvasCtx.drawImage(
+        renderComponent.svgImage,
+        translateComponent.position.x,
+        translateComponent.position.y);
     }
   }
 }
