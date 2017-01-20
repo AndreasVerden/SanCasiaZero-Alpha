@@ -2,7 +2,7 @@
 
 namespace sczGeb
 {
-  export class RenderSystem extends sczEcs.SystemBase
+  export class SvgRenderSystem extends sczEcs.SystemBase
   {
     private canvas: HTMLElement;
 
