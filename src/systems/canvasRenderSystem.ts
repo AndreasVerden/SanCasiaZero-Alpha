@@ -2,7 +2,7 @@
 
 namespace sczGeb
 {
-  export class RenderSystem extends sczEcs.SystemBase
+  export class CanvasRenderSystem extends sczEcs.SystemBase
   {
     private canvasCtx: CanvasRenderingContext2D;
 
