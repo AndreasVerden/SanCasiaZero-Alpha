@@ -1,0 +1,28 @@
+{
+  "name": "scz-geb",
+  "version": "0.1.0",
+  "description": "SanCasia Game Engine Base",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonKindhauser/Scz-Geb.git"
+  },
+  "keywords": [
+    "SanCasia",
+    "Zero",
+    "scz",
+    "game-engine",
+    "ecs"
+  ],
+  "author": "Simon Kindhauser",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/SimonKindhauser/Scz-Geb/issues"
+  },
+  "homepage": "https://github.com/SimonKindhauser/Scz-Geb#readme",
+  "devDependencies": {
+    "@types/sat": "0.0.28"
+  },
+  "dependencies": {
+    "sat": "^0.6.0"
+  }
+}

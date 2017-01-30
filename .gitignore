@@ -1,1 +1,2 @@
-obj/*
+obj/
+node_modules/
