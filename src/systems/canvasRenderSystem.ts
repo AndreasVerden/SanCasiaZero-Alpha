@@ -4,14 +4,14 @@ namespace sczGeb
 {
   export class CanvasRenderSystem extends sczEcs.SystemBase
   {
+    private canvas: HTMLCanvasElement;
     private canvasCtx: CanvasRenderingContext2D;
 
     constructor(canvasId: string)
     {
         super();
-        this.canvasCtx =
-          (<HTMLCanvasElement>document.getElementById(canvasId))
-          .getContext('2d');
+        this.canvas = (<HTMLCanvasElement>document.getElementById(canvasId));
+        this.canvasCtx = this.canvas.getContext('2d');
     }
 
     registerEntity(entity: sczEcs.Entity){
@@ -26,6 +26,9 @@ namespace sczGeb
     }
 
     process(){
+      // clear canvas
+      this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
       // sort entities by z position
       this.entities.sort(function(a: sczEcs.Entity, b: sczEcs.Entity){
         var aZ = a.getComponentsByType(TranslateComponent)[0].position.z;
@@ -42,11 +45,22 @@ namespace sczGeb
       var translateComponent: TranslateComponent
         = entity.getComponentsByType(TranslateComponent)[0];
 
+      var position = TranslateComponent.getPositionOf(translateComponent);
+
       // rendering happens here:
+      if(translateComponent.size == null){
+        this.canvasCtx.drawImage(
+          renderComponent.svgImage,
+          position.x - translateComponent.offset.x,
+          position.y - translateComponent.offset.y);
+        return;
+      }
+
       this.canvasCtx.drawImage(
         renderComponent.svgImage,
-        translateComponent.position.x,
-        translateComponent.position.y);
+        position.x - translateComponent.offset.x,
+        position.y - translateComponent.offset.y,
+        translateComponent.size.x, translateComponent.size.y);
     }
   }
 }
