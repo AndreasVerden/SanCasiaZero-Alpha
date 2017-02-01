@@ -45,20 +45,21 @@ namespace sczGeb
       var translateComponent: TranslateComponent
         = entity.getComponentsByType(TranslateComponent)[0];
 
+      var position = TranslateComponent.getPositionOf(translateComponent);
 
       // rendering happens here:
       if(translateComponent.size == null){
         this.canvasCtx.drawImage(
           renderComponent.svgImage,
-          translateComponent.position.x - translateComponent.offset.x,
-          translateComponent.position.y - translateComponent.offset.y);
+          position.x - translateComponent.offset.x,
+          position.y - translateComponent.offset.y);
         return;
       }
 
       this.canvasCtx.drawImage(
         renderComponent.svgImage,
-        translateComponent.position.x - translateComponent.offset.x,
-        translateComponent.position.y - translateComponent.offset.y,
+        position.x - translateComponent.offset.x,
+        position.y - translateComponent.offset.y,
         translateComponent.size.x, translateComponent.size.y);
     }
   }
