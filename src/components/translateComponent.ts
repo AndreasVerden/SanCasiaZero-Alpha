@@ -7,16 +7,19 @@ namespace sczGeb
     public position: {x: number, y: number, z: number};
     public angle: number;
     public offset: {x: number, y: number};
+    public size: {x: number, y: number};
 
     public constructor(
       position: {x: number, y: number, z: number} = {x: 0, y: 0, z: 0},
       angle: number = 0,
-      offset: {x: number, y: number} = {x: 0, y: 0})
+      offset: {x: number, y: number} = {x: 0, y: 0},
+      size: {x: number, y: number} = null)
     {
       super();
       this.position = position;
       this.angle = angle;
       this.offset = offset;
+      this.size = size;
     }
   }
 }

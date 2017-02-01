@@ -28,7 +28,7 @@ namespace sczGeb
     process(){
       // clear canvas
       this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            
+
       // sort entities by z position
       this.entities.sort(function(a: sczEcs.Entity, b: sczEcs.Entity){
         var aZ = a.getComponentsByType(TranslateComponent)[0].position.z;
@@ -45,11 +45,21 @@ namespace sczGeb
       var translateComponent: TranslateComponent
         = entity.getComponentsByType(TranslateComponent)[0];
 
+
       // rendering happens here:
+      if(translateComponent.size == null){
+        this.canvasCtx.drawImage(
+          renderComponent.svgImage,
+          translateComponent.position.x - translateComponent.offset.x,
+          translateComponent.position.y - translateComponent.offset.y);
+        return;
+      }
+
       this.canvasCtx.drawImage(
         renderComponent.svgImage,
         translateComponent.position.x - translateComponent.offset.x,
-        translateComponent.position.y - translateComponent.offset.y);
+        translateComponent.position.y - translateComponent.offset.y,
+        translateComponent.size.x, translateComponent.size.y);
     }
   }
 }
