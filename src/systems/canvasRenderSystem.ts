@@ -28,7 +28,7 @@ namespace sczGeb
     process(){
       // clear canvas
       this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+            
       // sort entities by z position
       this.entities.sort(function(a: sczEcs.Entity, b: sczEcs.Entity){
         var aZ = a.getComponentsByType(TranslateComponent)[0].position.z;
@@ -48,8 +48,8 @@ namespace sczGeb
       // rendering happens here:
       this.canvasCtx.drawImage(
         renderComponent.svgImage,
-        translateComponent.position.x,
-        translateComponent.position.y);
+        translateComponent.position.x - translateComponent.offset.x,
+        translateComponent.position.y - translateComponent.offset.y);
     }
   }
 }
